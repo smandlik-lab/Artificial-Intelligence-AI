@@ -1,886 +1,440 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>2026–27 .NET AI Engineer Roadmap</title>
-
-  <meta
-    name="description"
-    content="A practical 2026–27 roadmap for .NET developers building AI-powered enterprise applications."
-  />
-
-  <style>
-    :root {
-      --bg: #07111f;
-      --bg-soft: #0c1829;
-      --card: rgba(17, 31, 51, 0.82);
-      --card-hover: rgba(23, 42, 68, 0.95);
-      --text: #eef5ff;
-      --muted: #9db0c9;
-      --accent: #62d9ff;
-      --accent-2: #8b7cff;
-      --green: #58e6a7;
-      --border: rgba(255, 255, 255, 0.09);
-      --shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family:
-        Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at 10% 0%, rgba(98, 217, 255, 0.12), transparent 30%),
-        radial-gradient(circle at 90% 10%, rgba(139, 124, 255, 0.14), transparent 30%),
-        var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      min-height: 100vh;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      width: min(1180px, calc(100% - 40px));
-      margin: auto;
-    }
-
-    /* NAVIGATION */
-
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(16px);
-      background: rgba(7, 17, 31, 0.78);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-inner {
-      height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      font-size: 1.05rem;
-    }
-
-    .logo span {
-      color: var(--accent);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 26px;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .nav-links a:hover {
-      color: var(--text);
-    }
-
-    /* HERO */
-
-    .hero {
-      padding: 105px 0 80px;
-      text-align: center;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 14px;
-      border: 1px solid rgba(98, 217, 255, 0.25);
-      border-radius: 999px;
-      background: rgba(98, 217, 255, 0.07);
-      color: var(--accent);
-      font-size: 0.8rem;
-      font-weight: 700;
-      margin-bottom: 24px;
-    }
-
-    .hero h1 {
-      max-width: 950px;
-      margin: auto;
-      font-size: clamp(2.5rem, 6vw, 5.2rem);
-      line-height: 1.02;
-      letter-spacing: -3px;
-    }
-
-    .hero h1 span {
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .hero p {
-      max-width: 780px;
-      margin: 28px auto 0;
-      color: var(--muted);
-      font-size: 1.08rem;
-    }
-
-    .hero-actions {
-      margin-top: 35px;
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 12px 20px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      font-weight: 700;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: 0.2s ease;
-      background: var(--card);
-      color: var(--text);
-    }
-
-    .btn.primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color: #06101d;
-      border: none;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    /* INTRO */
-
-    .intro {
-      margin: 0 auto 80px;
-      max-width: 900px;
-      padding: 28px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.025);
-      border-radius: 18px;
-      text-align: center;
-    }
-
-    .intro strong {
-      color: var(--accent);
-    }
-
-    /* ROADMAP */
-
-    .section-heading {
-      text-align: center;
-      margin-bottom: 45px;
-    }
-
-    .section-heading .eyebrow {
-      color: var(--accent);
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .section-heading h2 {
-      margin-top: 8px;
-      font-size: clamp(2rem, 4vw, 3rem);
-      letter-spacing: -1px;
-    }
-
-    .section-heading p {
-      color: var(--muted);
-      max-width: 650px;
-      margin: 12px auto 0;
-    }
-
-    .roadmap {
-      position: relative;
-      display: grid;
-      gap: 25px;
-    }
-
-    .roadmap::before {
-      content: "";
-      position: absolute;
-      left: 35px;
-      top: 40px;
-      bottom: 40px;
-      width: 2px;
-      background: linear-gradient(
-        to bottom,
-        var(--accent),
-        var(--accent-2),
-        var(--green)
-      );
-      opacity: 0.35;
-    }
-
-    .stage {
-      position: relative;
-      display: grid;
-      grid-template-columns: 70px 1fr;
-      gap: 20px;
-      align-items: start;
-    }
-
-    .number {
-      width: 70px;
-      height: 70px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #102c45, #17254a);
-      border: 1px solid rgba(98, 217, 255, 0.3);
-      color: var(--accent);
-      font-size: 1.25rem;
-      font-weight: 900;
-      z-index: 2;
-      box-shadow: 0 0 30px rgba(98, 217, 255, 0.08);
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 28px;
-      box-shadow: var(--shadow);
-      transition: 0.25s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      background: var(--card-hover);
-      border-color: rgba(98, 217, 255, 0.25);
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-      align-items: flex-start;
-    }
-
-    .stage-title {
-      font-size: 1.35rem;
-      font-weight: 850;
-    }
-
-    .stage-title span {
-      color: var(--accent);
-      margin-right: 8px;
-    }
-
-    .stage-description {
-      margin-top: 8px;
-      color: var(--muted);
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-top: 22px;
-    }
-
-    .tag {
-      padding: 7px 11px;
-      border-radius: 8px;
-      background: rgba(98, 217, 255, 0.07);
-      border: 1px solid rgba(98, 217, 255, 0.13);
-      color: #c9eaff;
-      font-size: 0.82rem;
-      font-weight: 650;
-    }
-
-    .stage:nth-child(4n + 2) .tag {
-      background: rgba(139, 124, 255, 0.08);
-      border-color: rgba(139, 124, 255, 0.15);
-    }
-
-    .stage:nth-child(4n + 3) .tag {
-      background: rgba(88, 230, 167, 0.06);
-      border-color: rgba(88, 230, 167, 0.13);
-    }
-
-    /* PROJECTS */
-
-    .projects-section {
-      margin-top: 100px;
-    }
-
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .project {
-      padding: 24px;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.025);
-      transition: 0.2s ease;
-    }
-
-    .project:hover {
-      transform: translateY(-3px);
-      border-color: rgba(98, 217, 255, 0.25);
-    }
-
-    .project-icon {
-      font-size: 1.8rem;
-      margin-bottom: 12px;
-    }
-
-    .project h3 {
-      font-size: 1rem;
-    }
-
-    .project p {
-      color: var(--muted);
-      font-size: 0.88rem;
-      margin-top: 6px;
-    }
-
-    /* MISTAKE */
-
-    .mistake {
-      margin: 100px 0;
-      padding: 50px;
-      border-radius: 24px;
-      border: 1px solid rgba(255,255,255,0.1);
-      background:
-        radial-gradient(circle at 100% 0%, rgba(139,124,255,0.18), transparent 40%),
-        linear-gradient(135deg, rgba(98,217,255,0.06), rgba(139,124,255,0.04));
-      text-align: center;
-    }
-
-    .mistake .label {
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-weight: 800;
-      font-size: 0.75rem;
-    }
-
-    .mistake h2 {
-      margin: 12px 0 18px;
-      font-size: clamp(1.8rem, 4vw, 3rem);
-    }
-
-    .mistake p {
-      color: var(--muted);
-      max-width: 780px;
-      margin: auto;
-    }
-
-    .quote {
-      margin-top: 28px;
-      font-size: 1.15rem;
-      font-weight: 750;
-    }
-
-    /* FINAL */
-
-    .final {
-      text-align: center;
-      padding: 50px 0 90px;
-    }
-
-    .final h2 {
-      font-size: clamp(2rem, 4vw, 3.2rem);
-    }
-
-    .final p {
-      max-width: 700px;
-      margin: 15px auto 0;
-      color: var(--muted);
-    }
-
-    .principles {
-      margin-top: 30px;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .principle {
-      padding: 10px 15px;
-      border-radius: 999px;
-      background: rgba(88,230,167,0.06);
-      border: 1px solid rgba(88,230,167,0.14);
-      color: #bdf5db;
-      font-size: 0.85rem;
-      font-weight: 700;
-    }
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 25px 0;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.8rem;
-    }
-
-    /* RESPONSIVE */
-
-    @media (max-width: 850px) {
-      .nav-links {
-        display: none;
-      }
-
-      .projects {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .container {
-        width: min(100% - 25px, 1180px);
-      }
-
-      .hero {
-        padding: 75px 0 60px;
-      }
-
-      .hero h1 {
-        letter-spacing: -1.8px;
-      }
-
-      .roadmap::before {
-        display: none;
-      }
-
-      .stage {
-        grid-template-columns: 1fr;
-      }
-
-      .number {
-        width: 52px;
-        height: 52px;
-        font-size: 1rem;
-      }
-
-      .card {
-        padding: 22px;
-      }
-
-      .projects {
-        grid-template-columns: 1fr;
-      }
-
-      .mistake {
-        padding: 32px 22px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>.NET AI Engineer Roadmap 2026–27</title>
+<style>
+  :root{
+    --blue:#0756c9;
+    --blue-dark:#09245b;
+    --blue-soft:#eaf3ff;
+    --line:#a9c8f2;
+    --text:#17264a;
+    --muted:#50627f;
+    --white:#ffffff;
+    --bg:#f4f8fe;
+  }
+
+  *{box-sizing:border-box}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+  }
+
+  .page{
+    width:min(1400px,100%);
+    margin:auto;
+    padding:34px 30px 40px;
+  }
+
+  .hero{
+    text-align:center;
+    margin-bottom:30px;
+  }
+
+  .hero h1{
+    margin:0;
+    font-size:clamp(38px,5vw,72px);
+    line-height:1;
+    font-weight:900;
+    letter-spacing:-2.5px;
+    color:var(--blue-dark);
+  }
+
+  .hero h1 .ai{color:var(--blue)}
+
+  .subtitle{
+    display:inline-block;
+    margin-top:18px;
+    padding:10px 28px;
+    border-radius:14px;
+    background:var(--blue);
+    color:white;
+    font-size:clamp(22px,2.5vw,36px);
+    line-height:1.1;
+    font-weight:850;
+    box-shadow:0 8px 22px rgba(7,86,201,.15);
+  }
+
+  .intro{
+    max-width:1050px;
+    margin:0 auto 30px;
+    text-align:center;
+    font-size:17px;
+    line-height:1.55;
+    color:var(--muted);
+  }
+
+  .intro strong{color:var(--blue-dark)}
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+  }
+
+  .card{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    min-height:470px;
+    padding:22px 18px 16px;
+    border:1.5px solid var(--line);
+    border-radius:18px;
+    background:linear-gradient(180deg,#fbfdff 0%,#edf5ff 100%);
+    box-shadow:0 5px 16px rgba(24,73,130,.08);
+    transition:.2s ease;
+  }
+
+  .card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 26px rgba(24,73,130,.13);
+  }
+
+  .icon{
+    width:60px;
+    height:60px;
+    margin:0 auto 10px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    background:var(--blue);
+    color:white;
+    font-size:30px;
+    box-shadow:0 6px 15px rgba(7,86,201,.2);
+  }
+
+  .card h2{
+    margin:0;
+    min-height:54px;
+    text-align:center;
+    color:var(--blue-dark);
+    font-size:21px;
+    line-height:1.12;
+    font-weight:900;
+  }
+
+  .dash{
+    width:100%;
+    border-top:2px dotted #6e9de3;
+    margin:12px 0 13px;
+  }
+
+  .items{
+    list-style:none;
+    margin:0;
+    padding:0;
+    flex:1;
+  }
+
+  .items li{
+    display:flex;
+    align-items:flex-start;
+    gap:8px;
+    margin:7px 0;
+    font-size:14px;
+    line-height:1.3;
+    color:#243653;
+  }
+
+  .items li::before{
+    content:"✓";
+    flex:0 0 15px;
+    width:15px;
+    height:15px;
+    margin-top:1px;
+    border-radius:50%;
+    background:var(--blue);
+    color:white;
+    display:grid;
+    place-items:center;
+    font-size:9px;
+    font-weight:900;
+  }
+
+  .goal{
+    margin-top:14px;
+    padding:12px 11px;
+    border:1px solid #b7cff1;
+    border-radius:13px;
+    background:#e9f3ff;
+    text-align:center;
+  }
+
+  .goal strong{
+    display:block;
+    color:var(--blue);
+    font-size:15px;
+    margin-bottom:4px;
+  }
+
+  .goal span{
+    display:block;
+    font-size:13px;
+    line-height:1.35;
+    color:#31445f;
+  }
+
+  .bottom{
+    margin-top:30px;
+    display:grid;
+    grid-template-columns:1.15fr 1fr;
+    gap:20px;
+  }
+
+  .callout{
+    border:1.5px solid var(--line);
+    border-radius:18px;
+    background:white;
+    padding:23px 25px;
+    box-shadow:0 5px 16px rgba(24,73,130,.06);
+  }
+
+  .callout h2{
+    margin:0 0 8px;
+    color:var(--blue-dark);
+    font-size:22px;
+  }
+
+  .callout p{
+    margin:0;
+    color:var(--muted);
+    line-height:1.5;
+    font-size:15px;
+  }
+
+  .flow{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:15px;
+  }
+
+  .flow span{
+    padding:7px 11px;
+    border-radius:9px;
+    background:var(--blue-soft);
+    color:var(--blue-dark);
+    border:1px solid #c3d8f5;
+    font-size:12px;
+    font-weight:800;
+  }
+
+  .footer{
+    margin-top:25px;
+    padding-top:18px;
+    border-top:1px solid #c8d9ee;
+    text-align:center;
+    color:#647692;
+    font-size:13px;
+  }
+
+  @media(max-width:1100px){
+    .grid{grid-template-columns:repeat(2,1fr)}
+    .card{min-height:430px}
+  }
+
+  @media(max-width:650px){
+    .page{padding:22px 14px 30px}
+    .grid{grid-template-columns:1fr}
+    .bottom{grid-template-columns:1fr}
+    .hero h1{letter-spacing:-1.5px}
+    .card{min-height:auto}
+    .card h2{min-height:auto}
+  }
+
+  @media print{
+    body{background:white}
+    .page{padding:15px}
+    .card,.callout{box-shadow:none}
+    .card:hover{transform:none}
+  }
+</style>
 </head>
 
 <body>
+<div class="page">
 
-  <!-- NAVIGATION -->
-  <nav>
-    <div class="container nav-inner">
-      <div class="logo">
-        .NET<span>AI</span> Roadmap
-      </div>
-
-      <div class="nav-links">
-        <a href="#roadmap">Roadmap</a>
-        <a href="#projects">Projects</a>
-        <a href="#principles">Principles</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- HERO -->
   <header class="hero">
-    <div class="container">
-
-      <div class="badge">
-        🚀 2026–27 Developer Roadmap
-      </div>
-
-      <h1>
-        The <span>.NET AI Engineer</span> Roadmap
-      </h1>
-
-      <p>
-        From building APIs to designing, deploying and operating
-        enterprise-grade AI-powered applications.
-      </p>
-
-      <div class="hero-actions">
-        <a class="btn primary" href="#roadmap">
-          Explore Roadmap →
-        </a>
-
-        <button class="btn" onclick="window.print()">
-          🖨 Print / Save PDF
-        </button>
-      </div>
-
-    </div>
+    <h1>.NET <span class="ai">AI</span> Engineer Roadmap</h1>
+    <div class="subtitle">2026–27 Roadmap Cheat Sheet</div>
   </header>
 
-  <!-- INTRO -->
-  <section class="container">
-    <div class="intro">
-      <strong>AI isn't replacing .NET developers.</strong>
-      It's changing what successful .NET developers need to build.
-      The opportunity is growing for engineers who can combine
-      strong software engineering fundamentals with modern AI capabilities.
-    </div>
-  </section>
+  <p class="intro">
+    <strong>AI isn't replacing .NET developers.</strong>
+    The opportunity is for engineers who can design, build, deploy and operate
+    complete AI-powered applications — not just call an LLM API.
+  </p>
 
-  <!-- ROADMAP -->
-  <main id="roadmap" class="container">
+  <section class="grid">
 
-    <div class="section-heading">
-      <div class="eyebrow">The Learning Path</div>
-      <h2>8 Areas to Master</h2>
-      <p>
-        Build your skills progressively — from modern .NET foundations
-        to production-ready enterprise AI systems.
-      </p>
-    </div>
+    <article class="card">
+      <div class="icon">⚡</div>
+      <h2>Master C# &amp;<br>Modern .NET</h2>
+      <div class="dash"></div>
+      <ul class="items">
+        <li>C# 14</li>
+        <li>.NET 10</li>
+        <li>ASP.NET Core</li>
+        <li>Web API</li>
+        <li>Minimal APIs</li>
+        <li>Dependency Injection</li>
+        <li>Async Programming</li>
+      </ul>
+      <div class="goal"><strong>Goal:</strong><span>Build a strong foundation in modern .NET and core programming.</span></div>
+    </article>
 
-    <div class="roadmap">
+    <article class="card">
+      <div class="icon">▤</div>
+      <h2>Backend<br>Fundamentals</h2>
+      <div class="dash"></div>
+      <ul class="items">
+        <li>Entity Framework Core</li>
+        <li>Dapper</li>
+        <li>SQL Server</li>
+        <li>MongoDB</li>
+        <li>Authentication &amp; JWT</li>
+        <li>Caching (Redis)</li>
+        <li>Background Services</li>
+      </ul>
+      <div class="goal"><strong>Goal:</strong><span>Build robust, secure, and high-performance APIs.</span></div>
+    </article>
 
-      <!-- 01 -->
-      <article class="stage">
-        <div class="number">01</div>
+    <article class="card">
+      <div class="icon">☁</div>
+      <h2>Cloud-Native<br>Development</h2>
+      <div class="dash"></div>
+      <ul class="items">
+        <li>Docker</li>
+        <li>Kubernetes</li>
+        <li>Azure App Service</li>
+        <li>Azure Container Apps</li>
+        <li>Azure Functions</li>
+        <li>Azure Service Bus</li>
+        <li>Azure Key Vault</li>
+        <li>Azure API Management</li>
+      </ul>
+      <div class="goal"><strong>Goal:</strong><span>Deploy, scale, and manage cloud-native applications.</span></div>
+    </article>
 
-        <div class="card">
-          <div class="stage-title">
-            <span>01.</span> Master Modern .NET
-          </div>
+    <article class="card">
+      <div class="icon">♧</div>
+      <h2>Architecture &amp;<br>System Design</h2>
+      <div class="dash"></div>
+      <ul class="items">
+        <li>Clean Architecture</li>
+        <li>Microservices</li>
+        <li>Event-Driven Architecture</li>
+        <li>CQRS</li>
+        <li>Vertical Slice Architecture</li>
+        <li>Design Patterns</li>
+        <li>Distributed Systems</li>
+      </ul>
+      <div class="goal"><strong>Goal:</strong><span>Design scalable, maintainable, and resilient systems.</span></div>
+    </article>
 
-          <p class="stage-description">
-            Build a strong foundation in modern C# and .NET development.
-          </p>
+    <article class="card">
+      <div class="icon">🧠</div>
+      <h2>AI<br>Fundamentals</h2>
+      <div class="dash"></div>
+      <ul class="items">
+        <li>LLM Concepts</li>
+        <li>Tokens &amp; Context Windows</li>
+        <li>Prompt Engineering</li>
+        <li>Embeddings</li>
+        <li>Vector Databases</li>
+        <li>RAG (Retrieval-Augmented Generation)</li>
+        <li>AI Safety &amp; Evaluation</li>
+      </ul>
+      <div class="goal"><strong>Goal:</strong><span>Understand how AI models work and how to use them effectively.</span></div>
+    </article>
 
-          <div class="tags">
-            <span class="tag">C# 14</span>
-            <span class="tag">.NET 10</span>
-            <span class="tag">ASP.NET Core</span>
-            <span class="tag">Minimal APIs</span>
-            <span class="tag">Dependency Injection</span>
-            <span class="tag">Async Programming</span>
-          </div>
-        </div>
-      </article>
+    <article class="card">
+      <div class="icon">🤖</div>
+      <h2>AI with<br>.NET</h2>
+      <div class="dash"></div>
+      <ul class="items">
+        <li>Microsoft.Extensions.AI</li>
+        <li>Semantic Kernel</li>
+        <li>Azure AI Foundry</li>
+        <li>OpenAI APIs</li>
+        <li>Local AI Models</li>
+        <li>Function Calling</li>
+        <li>MCP (Model Context Protocol)</li>
+        <li>AI Agents</li>
+      </ul>
+      <div class="goal"><strong>Goal:</strong><span>Integrate AI capabilities seamlessly into .NET applications.</span></div>
+    </article>
 
-      <!-- 02 -->
-      <article class="stage">
-        <div class="number">02</div>
+    <article class="card">
+      <div class="icon">🛡</div>
+      <h2>Production<br>AI</h2>
+      <div class="dash"></div>
+      <ul class="items">
+        <li>Observability</li>
+        <li>Logging</li>
+        <li>Monitoring</li>
+        <li>AI Cost Optimization</li>
+        <li>Security</li>
+        <li>Rate Limiting</li>
+        <li>CI/CD</li>
+        <li>Performance Tuning</li>
+      </ul>
+      <div class="goal"><strong>Goal:</strong><span>Build, secure, and run AI solutions in production.</span></div>
+    </article>
 
-        <div class="card">
-          <div class="stage-title">
-            <span>02.</span> Build Backend Expertise
-          </div>
-
-          <p class="stage-description">
-            High-performance APIs remain the backbone of AI applications.
-          </p>
-
-          <div class="tags">
-            <span class="tag">Entity Framework Core</span>
-            <span class="tag">Dapper</span>
-            <span class="tag">SQL Server</span>
-            <span class="tag">MongoDB</span>
-            <span class="tag">Authentication & JWT</span>
-            <span class="tag">Redis Caching</span>
-            <span class="tag">Background Services</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- 03 -->
-      <article class="stage">
-        <div class="number">03</div>
-
-        <div class="card">
-          <div class="stage-title">
-            <span>03.</span> Learn Cloud-Native Development
-          </div>
-
-          <p class="stage-description">
-            Modern applications are increasingly designed for cloud-first environments.
-          </p>
-
-          <div class="tags">
-            <span class="tag">Docker</span>
-            <span class="tag">Kubernetes</span>
-            <span class="tag">Azure App Service</span>
-            <span class="tag">Azure Container Apps</span>
-            <span class="tag">Azure Functions</span>
-            <span class="tag">Azure Service Bus</span>
-            <span class="tag">Azure Key Vault</span>
-            <span class="tag">API Management</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- 04 -->
-      <article class="stage">
-        <div class="number">04</div>
-
-        <div class="card">
-          <div class="stage-title">
-            <span>04.</span> Understand Software Architecture
-          </div>
-
-          <p class="stage-description">
-            Good architecture helps systems scale, evolve and remain maintainable.
-          </p>
-
-          <div class="tags">
-            <span class="tag">Clean Architecture</span>
-            <span class="tag">Microservices</span>
-            <span class="tag">Event-Driven Architecture</span>
-            <span class="tag">CQRS</span>
-            <span class="tag">Vertical Slice Architecture</span>
-            <span class="tag">Design Patterns</span>
-            <span class="tag">Distributed Systems</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- 05 -->
-      <article class="stage">
-        <div class="number">05</div>
-
-        <div class="card">
-          <div class="stage-title">
-            <span>05.</span> Learn AI Fundamentals
-          </div>
-
-          <p class="stage-description">
-            Understanding AI concepts is as important as knowing how to call an AI API.
-          </p>
-
-          <div class="tags">
-            <span class="tag">LLMs</span>
-            <span class="tag">Prompt Engineering</span>
-            <span class="tag">Embeddings</span>
-            <span class="tag">Vector Databases</span>
-            <span class="tag">RAG</span>
-            <span class="tag">Context Windows</span>
-            <span class="tag">AI Evaluation</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- 06 -->
-      <article class="stage">
-        <div class="number">06</div>
-
-        <div class="card">
-          <div class="stage-title">
-            <span>06.</span> Build AI with .NET
-          </div>
-
-          <p class="stage-description">
-            This is where traditional .NET engineering meets Generative AI.
-          </p>
-
-          <div class="tags">
-            <span class="tag">Microsoft.Extensions.AI</span>
-            <span class="tag">Semantic Kernel</span>
-            <span class="tag">Azure AI Foundry</span>
-            <span class="tag">OpenAI APIs</span>
-            <span class="tag">Local Models</span>
-            <span class="tag">Function Calling</span>
-            <span class="tag">MCP</span>
-            <span class="tag">AI Agents</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- 07 -->
-      <article class="stage">
-        <div class="number">07</div>
-
-        <div class="card">
-          <div class="stage-title">
-            <span>07.</span> Learn Production AI
-          </div>
-
-          <p class="stage-description">
-            Building an AI demo is easy. Running reliable AI systems in production is the real challenge.
-          </p>
-
-          <div class="tags">
-            <span class="tag">Security</span>
-            <span class="tag">Observability</span>
-            <span class="tag">Monitoring</span>
-            <span class="tag">Performance</span>
-            <span class="tag">Cost Optimization</span>
-            <span class="tag">Rate Limiting</span>
-            <span class="tag">CI/CD</span>
-          </div>
-        </div>
-      </article>
-
-      <!-- 08 -->
-      <article class="stage">
-        <div class="number">08</div>
-
-        <div class="card">
-          <div class="stage-title">
-            <span>08.</span> Build Real Projects
-          </div>
-
-          <p class="stage-description">
-            Projects create experience. Experience creates opportunities.
-          </p>
-
-          <div class="tags">
-            <span class="tag">AI Chat App</span>
-            <span class="tag">Enterprise AI Copilot</span>
-            <span class="tag">Document Q&A</span>
-            <span class="tag">Resume Analyzer</span>
-            <span class="tag">AI Customer Support Bot</span>
-            <span class="tag">Code Review Assistant</span>
-            <span class="tag">Multi-Agent Applications</span>
-          </div>
-        </div>
-      </article>
-
-    </div>
-  </main>
-
-  <!-- PROJECTS -->
-  <section id="projects" class="projects-section container">
-
-    <div class="section-heading">
-      <div class="eyebrow">Build Something Real</div>
-      <h2>Project Ideas</h2>
-      <p>
-        Move beyond tutorials by building complete AI-powered systems.
-      </p>
-    </div>
-
-    <div class="projects">
-
-      <div class="project">
-        <div class="project-icon">💬</div>
-        <h3>AI Chat Application</h3>
-        <p>Build a production-style conversational AI application.</p>
-      </div>
-
-      <div class="project">
-        <div class="project-icon">🤖</div>
-        <h3>Enterprise AI Copilot</h3>
-        <p>Connect an AI assistant to enterprise data and workflows.</p>
-      </div>
-
-      <div class="project">
-        <div class="project-icon">📄</div>
-        <h3>Document Q&A</h3>
-        <p>Use embeddings, vector search and RAG to answer document questions.</p>
-      </div>
-
-      <div class="project">
-        <div class="project-icon">📊</div>
-        <h3>Resume Analyzer</h3>
-        <p>Extract skills, summarize experience and compare job requirements.</p>
-      </div>
-
-      <div class="project">
-        <div class="project-icon">🎧</div>
-        <h3>AI Customer Support</h3>
-        <p>Combine conversational AI with enterprise support workflows.</p>
-      </div>
-
-      <div class="project">
-        <div class="project-icon">👨‍💻</div>
-        <h3>Code Review Assistant</h3>
-        <p>Build an AI-powered code analysis and review workflow.</p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- BIGGEST MISTAKE -->
-  <section class="container">
-    <div class="mistake">
-
-      <div class="label">⚠ The Biggest Mistake</div>
-
-      <h2>
-        Learning Tools Instead of Learning Systems
-      </h2>
-
-      <p>
-        Companies need engineers who understand the complete lifecycle
-        of AI-powered applications — from architecture and development
-        to deployment, security, monitoring and operations.
-      </p>
-
-      <div class="quote">
-        Don't just learn how to call an LLM API.
-        Learn how to build the system around it.
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FINAL -->
-  <section id="principles" class="final container">
-
-    <div class="section-heading">
-      <div class="eyebrow">The Goal</div>
-
-      <h2>
-        Become an AI-Powered .NET Engineer
-      </h2>
-
-      <p>
-        Master the fundamentals, understand AI, build real systems,
-        and learn how to operate them reliably at scale.
-      </p>
-    </div>
-
-    <div class="principles">
-      <div class="principle">Build</div>
-      <div class="principle">Architect</div>
-      <div class="principle">Deploy</div>
-      <div class="principle">Secure</div>
-      <div class="principle">Observe</div>
-      <div class="principle">Scale</div>
-      <div class="principle">Optimize</div>
-    </div>
+    <article class="card">
+      <div class="icon">🚀</div>
+      <h2>Build Real<br>Projects</h2>
+      <div class="dash"></div>
+      <ul class="items">
+        <li>AI Chat Application</li>
+        <li>AI Customer Support Bot</li>
+        <li>Resume Analyzer</li>
+        <li>Document Q&amp;A System</li>
+        <li>Code Review Assistant</li>
+        <li>Enterprise AI Copilot</li>
+        <li>Multi-Agent Applications</li>
+      </ul>
+      <div class="goal"><strong>Goal:</strong><span>Build projects, solve real problems, and create a strong portfolio.</span></div>
+    </article>
 
   </section>
 
-  <footer>
-    2026–27 .NET AI Engineer Roadmap · Learn → Build → Deploy → Operate
+  <section class="bottom">
+    <div class="callout">
+      <h2>⚠ The Biggest Mistake?</h2>
+      <p>
+        Learning tools instead of learning systems. Focus on the complete
+        lifecycle of an AI application — architecture, development,
+        deployment, security, observability and operations.
+      </p>
+    </div>
+
+    <div class="callout">
+      <h2>🎯 The Engineer Mindset</h2>
+      <p>Move beyond tutorials and learn to build complete production systems.</p>
+      <div class="flow">
+        <span>Learn</span>
+        <span>Design</span>
+        <span>Build</span>
+        <span>Deploy</span>
+        <span>Secure</span>
+        <span>Observe</span>
+        <span>Scale</span>
+        <span>Optimize</span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    .NET AI Engineer Roadmap · 2026–27 · Learn → Build → Deploy → Operate
   </footer>
 
+</div>
 </body>
 </html>
-```
